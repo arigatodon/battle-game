@@ -1,58 +1,39 @@
-/*
-Al constructor de Heroe, agregar la propiedad de experiencia.
-Cada vez que el heroe mate a un monstruo, debe aumentar su experiencia.
-si, la experiencia que tiene el Heroe es mayor que un multiplo de 1000
-El heroe debe subir de nivel, y multiplicar su ataque y salud por
-el nivel que tenga el heroe.
-
-Crear otro método de prototipo que reciba una instancia de constructor
-Pocion, y esta aumente la cantidad de salud del heroe.
-
-Crear un constructor Pocion que reciba como parametro la cantidad
-de energía que recupera.*/
-
-
-
-/*Crear un constructor de Monstruo, que tenga como argumentos
-salud, poder de ataque y raza.*/
-	function Monstruo(salud,ataque,raza,exp){  /*cuando es con mayuscula es que definimos un constructors*/
+var Monstruo =	function(nombre,salud,fuerza,raza){  /*cuando es con mayuscula es que definimos un constructors*/
+	this.nombre = nombre;
 	this.salud = salud;
-	this.ataque = ataque;             /*bloque*/
+	this.fuerza = fuerza;             /*bloque*/
 	this.raza = raza;
-	this.exp = exp;
 	/*this.nombre = function(){}*/
-}
-/*Crear un constructor de Heroe, que tenga como argumentos
-salud, poder de ataque y raza.*/
-function Heroe(salud,ataque,raza){
+};
+
+	Monstruo.prototype.ataca = function(heroe){
+		if (heroe.salud <= 0){
+			alert("El Heroe a muerto ");
+		}  
+	};
+
+var Heroe = function (nombre,salud,fuerza,raza){
+	this.nombre = nombre;
 	this.salud = salud;
-	this.ataque = ataque;
+	this.fuerza = fuerza;
 	this.raza = raza;
-}
+};
+	Heroe.prototype.ataca = function(monstruo){
+		monstruo.salud  -= this.fuerza ;
+
+		if ( monstruo.salud <= 0){
+			return "Mataste a la bestia :"+monstruo.nombre;
+		}
+		else{
+			return  "la salud de "+monstruo.nombre+" es "+monstruo.salud ;
+		}
+};
+
 //characters -----------------------------------
-var gorath = new Monstruo (900,20,'god');
-var golo = new Monstruo (200,60,'necromante');
 
-var satori = new Heroe (70,80,'humano');
-var HHH  = new Heroe (90 , 60,'marciano');
+ gorath = new Monstruo ('gorath',900,20,'god');
+ golo = new Monstruo ('golo',200,60,'necromante');
 
-/*Crear un metodo de prototipo que reciba una instancia de Heroe
-y que este metodo le descuente la energía al heroe.
-Si la energía del heroe llega por debajo de 0, debe indicar
-que el heroe se murió.*/
-Monstruo.prototype.ataque = function(Heroe){
+ satori = new Heroe ('satori',70,90,'humano');
+ HHH  = new Heroe ('HHH',90,60,'marciano');
 
-	if (Heroe.salud <= 0){
-		alert("El Heroe a muerto ");
-	}  
-};
-/*Crear un metodo de prototipo que reciba una instancia de Monstruo
-y que este método le descuente energía al monstruo.
-Si la energía del monstruo llega por debajo de 0, debe indicar
-que el heroe mató con éxito al monstruo.*/
-Heroe.prototype.ataque = function(Monstruo){
-	this.heroe.ataque =  this.heroe.ataque - this.Monstruos.salud ;
-	if (Monstruo.salud <= 0){
-		alert("Mataste a la bestia  ");
-	}
-};
