@@ -26,7 +26,7 @@ Pocion, y esta aumente la cantidad de salud del heroe.
 Crear un constructor Pocion que reciba como parametro la cantidad
 de energía que recupera.
 */
-
+nivel = 1000;
 exp = 1 ;
 
 
@@ -64,38 +64,49 @@ var Heroe = function (nombre,salud,fuerza,raza){
 };
 	Heroe.prototype.ataca = function(monstruo){
 		monstruo.salud  -= this.fuerza ;
-
+				/*matar  a la bestia*/
 		if ( monstruo.salud <= 0){
 			console.log("Mataste a la bestia = "+monstruo.nombre);
 				while (monstruo.salud < 0){
 					monstruo.salud = 0;
 			}
 		}
-		else{
-			 this.exp = this.exp + (monstruo.salud/2) + (monstruo.fuerza/2);/*experiencia del personaje mientras este vivo
-			 el monstruo gana la division de la salud y la fuerza oponente como experiencia*/
-			return  "la salud de "+monstruo.nombre+" es "+monstruo.salud ;
+			else{
+				 this.exp = this.exp + (monstruo.salud/2) + (monstruo.fuerza/2);/*experiencia del personaje mientras este vivo
+				 el monstruo gana la division de la salud y la fuerza oponente como experiencia*/
+					console.log ("la salud de "+monstruo.nombre+" es "+monstruo.salud) ;
+				}
+		if(this.exp >= nivel){/* aumenta  la fuerza y la salud  * el nivel */
+			this.fuerza = this.fuerza * nivel/1000;
+			this.salud = this.salud * nivel/1000;
+			nivel +=1000;	
+			 return ("has subido de nivel = "+ nivel/1000);
+			
 		}
+
+
 	};
+
+	if(Heroe(exp) >= nivel){
+	  console.log("has subido de nivel ");
+	}
 
 	Heroe.prototype.cura = function(pocion){
 	this.salud += pocion.energia;
 };
-Heroe.prototype.nivel = function(){
-	 if(this.exp %1000===0){
-	 this.fuerza = this.fuerza *2 ;
-	 this.salud = this.salud *2;
-	}
-};
+
+//ver nivel 
+
 //characters -----------------------------------
-
-
-
+/*monstruos .-*/
  gorath = new Monstruo ('gorath',900,20,'god');
  golo = new Monstruo ('golo',200,60,'necromante');
+belsebu = new Monstruo('belsebu',900,100,'criatura')
 
+/*heroes*/
  satori = new Heroe ('satori',70,90,'humano');
  HHH  = new Heroe ('HHH',90,60,'marciano');
 
+/*pociones*/
 verde = new Pocion (100);
 roja = new Pocion (50);
